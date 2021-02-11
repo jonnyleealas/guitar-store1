@@ -5,8 +5,6 @@ package models;
 public class Guitar {
     private int id, yearMade;
 
-
-
     private String name, make, model, description, color;
 
     public int getYearMade() { return yearMade; }

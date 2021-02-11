@@ -15,13 +15,14 @@ public class GuitarRepository {
 
     private List<Guitar> guitarList = new ArrayList<>();
 
-    public int bookId = 0;
+    public int guitarId = 0;
 
     public List<Guitar> findAll() {
+        return jpaApi.em().createQuery("SELECT guitars FROM Guitar guitars", Guitar.class).getResultList();
 
 // List<Guitar> guitars = jpaApi.em().createQuery("SELECT guitars FROM Guitar guitars", Guitar.class).getResultList();
-        System.out.println("I am printing shit"+ jpaApi.em().createQuery("SELECT guitars FROM Guitar guitars"));
-        return guitarList;
+//        System.out.println("I am printing shit"+ jpaApi.em().createQuery("SELECT guitars FROM Guitar guitars"));
+//        return guitarList;
     }
 
     public Optional<Guitar> findById(int id) {
@@ -32,21 +33,25 @@ public class GuitarRepository {
         guitarList = guitarList.stream().filter(guitar -> guitar.getId() != id).collect(Collectors.toList());
     }
 
-    public void add(Guitar guitar) {
-        if (!findById(guitar.getId()).isPresent()) {
-            guitar.setId(++bookId);
-            guitarList.add(guitar);
-        }
-    }
+//    public void add(Guitar guitar) {
+//        if (!findById(guitar.getId()).isPresent()) {
+//            guitar.setId(++guitarId);
+//            guitarList.add(guitar);
+//        }
+//    }
 
     public void update(Guitar guitar) {
-        Optional<Guitar> bookOptional = findById(guitar.getId());
-        if (bookOptional.isPresent()) {
-            Guitar guitarToUpdate = bookOptional.get();
+        Optional<Guitar> guitarOptional = findById(guitar.getId());
+        if (guitarOptional.isPresent()) {
+            Guitar guitarToUpdate = guitarOptional.get();
 
             guitarToUpdate.setDescription(guitar.getDescription());
             guitarToUpdate.setName(guitar.getName());
         }
+    }
+
+    public void add(Guitar guitar) {
+        jpaApi.em().persist(guitar);
     }
 
 }

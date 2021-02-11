@@ -8,14 +8,13 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import repositories.GuitarRepository;
 
-import repositories.GuitarRepository;
 
 
 public class GuitarController extends Controller {
 
     @Inject
     public GuitarRepository guitarRepository;
-//    @play.db.jpa.Transactional
+
      @Transactional
     public Result findAll() {
         return ok(Json.toJson(guitarRepository.findAll())).as("application/json");

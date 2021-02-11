@@ -19,7 +19,7 @@ public class GuitarRepository {
 
     public List<Guitar> findAll() {
         return jpaApi.em().createQuery("SELECT guitars FROM Guitar guitars", Guitar.class).getResultList();
-
+//        System.out.println(jpaApi.em().createQuery("SELECT guitars FROM Guitar guitars"));
 // List<Guitar> guitars = jpaApi.em().createQuery("SELECT guitars FROM Guitar guitars", Guitar.class).getResultList();
 //        System.out.println("I am printing shit"+ jpaApi.em().createQuery("SELECT guitars FROM Guitar guitars"));
 //        return guitarList;

@@ -13,7 +13,7 @@ libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.0"
 // Testing libraries for dealing with CompletionStage...
 libraryDependencies += "org.assertj" % "assertj-core" % "3.6.2" % Test
 libraryDependencies += "org.awaitility" % "awaitility" % "2.0.0" % Test
-
+libraryDependencies += "com.google.inject" % "guice" % "4.2.0"
 libraryDependencies ++= Seq(
   javaJpa,
   javaJdbc,

@@ -8,6 +8,8 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import repositories.GuitarRepository;
 
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class GuitarController extends Controller {
@@ -15,9 +17,16 @@ public class GuitarController extends Controller {
     @Inject
     public GuitarRepository guitarRepository;
 
+    public Result jsonResponse(String field, Object data) {
+        Map<String, Object> response = new HashMap<>();
+        response.put(field, data);
+
+        return ok(Json.toJson(response)).as("application/json");
+    }
+
      @Transactional
     public Result findAll() {
-        return ok(Json.toJson(guitarRepository.findAll())).as("application/json");
+        return jsonResponse("guitars",Json.toJson(guitarRepository.findAll())).as("application/json");
     }
 
     @Transactional

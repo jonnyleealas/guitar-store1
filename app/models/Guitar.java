@@ -1,11 +1,21 @@
 package models;
-@javax.persistence.Entity
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 @javax.persistence.Table(name = "guitars")
-
+@Entity
 public class Guitar {
-    private int id, yearMade;
 
-    private String name, make, model, description, color;
+    public String name, make, model, description, color;
+
+    @Id
+    @Column(name = "id", nullable = false)
+    public int id;
+
+    @Column(name ="year_made")
+    public int yearMade;
 
     public int getYearMade() { return yearMade; }
 

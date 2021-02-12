@@ -13,24 +13,19 @@ import play.db.jpa.JPAApi;
 public class GuitarRepository {
     @Inject JPAApi jpaApi;
 
-    private List<Guitar> guitarList = new ArrayList<>();
-
-    public int guitarId = 0;
-
     public List<Guitar> findAll() {
         return jpaApi.em().createQuery("SELECT guitars FROM Guitar guitars", Guitar.class).getResultList();
-//        System.out.println(jpaApi.em().createQuery("SELECT guitars FROM Guitar guitars"));
-// List<Guitar> guitars = jpaApi.em().createQuery("SELECT guitars FROM Guitar guitars", Guitar.class).getResultList();
-//        System.out.println("I am printing shit"+ jpaApi.em().createQuery("SELECT guitars FROM Guitar guitars"));
-//        return guitarList;
     }
 
     public Optional<Guitar> findById(int id) {
-        return guitarList.stream().filter(guitar -> guitar.getId() == id).findFirst();
+//        return guitarList.stream().filter(guitar -> guitar.getId() == id).findFirst();
+        return jpaApi.em().createQuery("SELECT guitar FROM Guitar guitar WHERE id = :id", Guitar.class)
+                .setParameter("id", id)
+                .getResultList().stream().findFirst();
     }
 
     public void delete(int id) {
-        guitarList = guitarList.stream().filter(guitar -> guitar.getId() != id).collect(Collectors.toList());
+//        guitarList = guitarList.stream().filter(guitar -> guitar.getId() != id).collect(Collectors.toList());
     }
 
 //    public void add(Guitar guitar) {
